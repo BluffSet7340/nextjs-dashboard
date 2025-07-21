@@ -38,4 +38,24 @@ Modifying the config files a little and next.js figures out to load the static c
 
 ### Chapter 11 - Adding Search and Pagination
 
-In this chapter I add search and pagination to the invoices page!!!
+In this chapter I add search and pagination to the invoices page!!! The search is done via the url search params. This has the benefit of being bookmarkable, server side rendering, and for tracking user behavior.
+
+The search functionality is implemented via three client hooks - useSearchParams, usePathname, and useRouter. 
+
+Four steps are required: capture the user's input, update url with search params, keep the url in sync with input field, and update table to reflect user search query
+
+Using the three client hooks above, you can update the URL without refreshing the page due to next.js client side navigation. Keeping the URL and input in sync requires you to set a defaultValue in the input field.
+
+The search feature is pretty cool, not only can I search by name but also by email, and by category of paid or pending. I just checked and realized its due to the flexible SQL statement that allows for this.
+
+When searching for an invoice, each letter typed send a request to the database, which is a waste of resources, especially for thousands of users. Rather we use the debouncing technique - limiting the rate at which a function can fire.
+
+Lastly, I added pagination by using the searchparams and pathname and other functions to allow the user to type a search query, and then numbers appear at the bottom, allowing the user to scroll from one page to the next to see their results
+
+### Chapter 12 - Mutating Data
+
+Mutating data needs to be done on the server side, not the client. In this case we add server actions to grab the data submitted to a form and then perform type checking and validation to ensure that the data returned is of the expected type. For validation, we use a library called Zod
+
+So we can update data and then redirect the user to the page where they can view all  the invoices including the updated one. Updated invoices and learnt how to use Server Actons to update data
+
+### Chapter 13 - Handling Errors
